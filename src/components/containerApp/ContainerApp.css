@@ -1,0 +1,44 @@
+@media screen and (max-width: 600px){
+    
+    .title{
+        display: flex;
+        color: #333333;
+        text-align: start;
+        align-items: center;
+        background-color: #ebebd2;
+        border-radius: 10px;
+        margin-left: 7%;
+        padding: 8px;
+    }
+
+    .container-header{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        place-items: center;
+        
+    }
+
+    .main-container{
+        display: grid;
+        grid-template-rows: 10% 30% 10% 50% ;
+        background-color: #d6dddf;
+        height: 95vh;
+        padding: 10px;
+    }
+
+    .container-result{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333333;
+    }
+
+    .container-input{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+

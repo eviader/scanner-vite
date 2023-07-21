@@ -1,0 +1,36 @@
+@media screen and (max-width: 600px){
+    .section-articul{
+        display: grid;
+        grid-template-columns: 65% 35%;
+        align-content: center;
+        justify-content: center;
+        color: #333333;
+        background-color: #7FB3D5;
+        max-height: 90%;
+        width: 90%;
+        border-radius: 8px;
+        overflow-y: scroll;
+        border: solid 1px #195775;
+    }
+
+    .container-articule{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: solid 1px #195775;
+    }
+
+    .container-price{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: solid 1px #195775;
+    }
+    
+    .articule, .price {
+        font-size: 1.2rem;
+        margin: 3px;
+        align-self: center;
+    }
+
+}
