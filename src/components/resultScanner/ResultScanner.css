@@ -4,27 +4,31 @@
         grid-template-columns: 65% 35%;
         align-content: center;
         justify-content: center;
-        color: #333333;
-        background-color: #7FB3D5;
+        color: #F8FCF4;
+        background-color: #8CC63F;
+        opacity: 0.89;
         max-height: 90%;
         width: 90%;
         border-radius: 8px;
         overflow-y: scroll;
-        border: solid 1px #195775;
+        border: solid 1px #628D2A;
+        padding: 2px;
     }
 
     .container-articule{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        border: solid 1px #195775;
+        border: solid 1px #8CC63F;
+        background-color:  #628D2A;
     }
 
     .container-price{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        border: solid 1px #195775;
+        border: solid 1px #8CC63F;
+        background-color:  #628D2A;
     }
     
     .articule, .price {

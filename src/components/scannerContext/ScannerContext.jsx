@@ -60,7 +60,12 @@ export function ScannerContextProvider(props){
 
     }
 
-    function filterContext(textFilter){
+    async function filterContext(textFilter){
+      const result = articul.filter(art => art.codAlt.includes(textFilter.toUpperCase()))
+      setFilterArticul(result)
+    }
+
+    async function filterAlternativeContext(textFilter){
       const result = articul.filter(art => art.articulo.includes(textFilter.toUpperCase()))
       setFilterArticul(result)
     }
@@ -71,7 +76,8 @@ export function ScannerContextProvider(props){
               articul,
               filterArticul,
               filterContext,
-              getFiles
+              getFiles,
+              filterAlternativeContext
             
             }
         }>
