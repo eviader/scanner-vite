@@ -2,7 +2,7 @@ import './InputFile.css'
 import { useContext } from 'react'
 import readXlsxFile from 'read-excel-file'
 import { ScannerContext } from '../scannerContext/ScannerContext'
-
+import  Navigation  from '../navigation/Navigation'
 
 function InputFile() {
     const { getFiles } = useContext(ScannerContext)
@@ -14,6 +14,7 @@ function InputFile() {
 
     return (
     <>
+        <Navigation />
         <input className='input-file'  onChange={(e) => handleInput(e.target)} type="file" name="excel-file" />
     </>
   )

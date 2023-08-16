@@ -7,7 +7,7 @@ import {ScannerContextProvider} from './components/scannerContext/ScannerContext
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ScannerContextProvider>
-    <App />
+        <App />  
     </ScannerContextProvider>
   </React.StrictMode>,
 )

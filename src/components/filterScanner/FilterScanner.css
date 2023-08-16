@@ -1,4 +1,4 @@
-@media screen and (max-width: 600px){
+@media screen and (max-width: 700px){
 
     .filter{
         height: 60%;
@@ -21,6 +21,7 @@
         border-radius: 0px 10px 10px 0px;
         border: 1px solid #4D5246;
         cursor: pointer;
+        color: #000;
     }
 
 }

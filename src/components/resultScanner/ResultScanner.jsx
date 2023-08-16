@@ -1,5 +1,5 @@
 import './ResultScanner.css'
-import {useContext} from 'react'
+import {useContext, useEffect} from 'react'
 import { ScannerContext } from '../scannerContext/ScannerContext'
 
 function ResultScanner() {
@@ -20,7 +20,7 @@ function ResultScanner() {
             </>
           ))
         }
-      </div>
+      </div>  
     </>
   )
 }

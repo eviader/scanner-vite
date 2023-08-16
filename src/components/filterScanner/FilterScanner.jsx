@@ -14,7 +14,7 @@ function FilterScanner() {
   return (
     <>  
         <div className='filter'>
-            <input className='filter-input' onChange={(e) => handleFilter(e.target.value)} type="text" placeholder='Codigo' />
+            <input className='filter-input' value={filterArticul} onChange={(e) => handleFilter(e.target.value)} type="text" placeholder='Codigo' />
             <button className='button-filter' onClick={() => filterContext(filterArticul)}><IconSearch /></button>
         </div>
     </>

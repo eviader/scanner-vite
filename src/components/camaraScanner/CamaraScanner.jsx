@@ -2,114 +2,81 @@ import './CamaraScanner.css'
 import Quagga  from "quagga"
 import styled from 'styled-components'
 import config from './config.json'
-import { useEffect } from "react"
+import { IconTags, IconCamera, IconCameraRotate   } from '@tabler/icons-react';
+import { useEffect, useContext, useState, useMemo } from "react"
+import { ScannerContext } from '../scannerContext/ScannerContext'
 
-function CamaraScanner({onDetected}) {
+function CamaraScanner() {
+  const [camR, setCamR] = useState(false)
+  const { filterScannerContext } = useContext(ScannerContext)
 
-  const _onDetected = (result) => {
-    let code = result;
-    Quagga.stop();
-    return props.handleScan(code);
-  };
 
-  const _onProcessed = (result) => {
-    // let drawingCtx = Quagga.canvas.ctx.overlay,
-    //   drawingCanvas = Quagga.canvas.dom.overlay;
-    // if (result) {
-    //   if (result.boxes) {
-    //     drawingCtx.clearRect(
-    //       0,
-    //       0,
-    //       parseInt(drawingCanvas.getAttribute('width'), 10),
-    //       parseInt(drawingCanvas.getAttribute('height'), 10)
-    //     );
-    //     result.boxes
-    //       .filter(function (box) {
-    //         return box !== result.box;
-    //       })
-    //       .forEach(function (box) {
-    //         Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
-    //           color: 'green',
-    //           lineWidth: 2,
-    //         });
-    //       });
-    //   }
-    //   if (result.box) {
-    //     Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
-    //       color: '#00F',
-    //       lineWidth: 2,
-    //     });
-    //   }
-    //   if (result.box) {
-    //     Quagga.ImageDebug.drawPath(
-    //       result.line,
-    //       { x: 'x', y: 'y' },
-    //       drawingCtx,
-    //       { color: 'red', lineWidth: 3 }
-    //     );
-    //   }
-    // }
-  };
+  const handleRotateCam = () => {
+    if(camR == false){
+      setCamR(true)
+    }else{
+      setCamR(false) 
+    }
+  }
 
   useEffect(() => {
-    Quagga.init(
-      {
-        inputStream: {
-          type: 'LiveStream',
-          constraints: {
-            width: { min: 800, max: 1280 },
-            height: { min: 600, max: 720 },
-            aspectRatio: { min: 4 / 3, max: 16 / 9 },
-          },
-          area: {
-            // defines rectangle of the detection/localization area
-            top: '0%', // top offset
-            right: '0%', // right offset
-            left: '0%', // left offset
-            bottom: '0%', // bottom offset
-          },
-        },
-        frequency: 'full',
-        locator: {
-          patchSize: 'medium',
-          halfSample: true,
-        },
-        numOfWorkers: 2,
-        decoder: {
-          readers: [
-            // 'code_39_reader',
-            'ean_reader',
-            // 'ean_8_reader',
-            // 'code_128_reader',
-            //'code_39_vin_reader'
-            //'codabar_reader',
-            // 'upc_reader',
-            //'upc_e_reader',
-            //'i2of5_reader'
-          ],
-        },
-        locate: true,
-      },
-      function (err) {
-        if (err) {
-          return console.log(err);
-        }
-        Quagga.start();
-      }
-    );
-    Quagga.onDetected(_onDetected);
-    Quagga.onProcessed(_onProcessed);
-    return () => {
-      Quagga.stop();
-    };
-  }, []);
 
-  const detected = result => {
-    onDetected(result.codeResult.code);
-  };
+    // Configuración de Quagga (pueden variar según la documentación de la librería)
+    const config = {
+      inputStream: {
+        type: 'LiveStream',
+        constraints: {
+          width: 320,
+          height: 480,
+          facingMode: camR ? "user" : "environment", // Puedes cambiarlo según la cámara que desees utilizar
+
+        },
+        area: { // defines rectangle of the detection/localization area
+          top: "0%",    // top offset
+          right: "0%",  // right offset
+          left: "0%",   // left offset
+          bottom: "0%"  // bottom offset
+        },
+      },
+      locator: {
+        patchSize: 'medium',
+        halfSample: true,
+      },
+      numOfWorkers: navigator.hardwareConcurrency,
+      decoder: {
+        readers: ['ean_reader', 'upc_reader'],
+      },
+      locate: false,
+      frecuency: 2,
+
+    };
+
+    // Inicializar Quagga
+    Quagga.init(config, (err) => {
+      if (err) {
+        console.error('Error al inicializar Quagga:', err);
+        return;
+      }
+      Quagga.start();
+    });
+
+    // Escuchar eventos de Quagga
+    Quagga.onDetected((data) => {
+      if(data){
+        const dataCode = data.codeResult.code
+        filterScannerContext(dataCode)
+      }
+    });
+
+    // Limpiar Quagga al desmontar el componente
+
+  }, [camR]);
 
   return (
-    <div id="interactive" className="viewport" />
+    <>
+      <button className='rotate-cam' onClick={handleRotateCam}><IconCameraRotate color='white'/></button>
+      <div id="interactive" className="viewport" />
+    </>
   );
 };
 

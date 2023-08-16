@@ -1,31 +1,33 @@
 import './ContainerApp.css'
-import { IconTags } from '@tabler/icons-react';
+import { useState, useContext } from 'react';
+import { IconCamera } from '@tabler/icons-react';
 import ResultScanner from '../resultScanner/ResultScanner';
 import FilterScanner from '../filterScanner/FilterScanner';
-import InputFile from '../InputFile/InputFile';
+import Navigation from '../navigation/Navigation';
 import CamaraScanner from '../camaraScanner/CamaraScanner';
-import { useState, useContext } from 'react';
 import { ScannerContext } from '../scannerContext/ScannerContext';
+import { useEffect, useMemo, useRef } from 'react';
+
 
 function ContainerApp() {
-  const {  filterAlternativeContext } = useContext(ScannerContext)
-  const [scanCode, setScanCode] = useState('');
-  const [modal, setModal] = useState(false);
+  const { activeButtton } = useContext(ScannerContext)
+  const [initButton, setInitButton] = useState(true)
 
-  const _toggle = () => {
-    setModal(!modal);
-  };
 
-  const _onDetected = (result) => {
-    setScanCode(result ? result.codeResult.code : '');
-    filterAlternativeContext(scanCode)
-  };
+  useEffect(() =>{
+    initButton
+    setInitButton(activeButtton)
+  },[])
+
+  const handleCam = () => {
+    setInitButton(true)
+  }
+  
 
   return (
     <main className='main-container'>
         <div className='container-header'>
-           <a href="http://">Busqueda</a>
-           <a href="http://">Carga</a> 
+            <Navigation />
         </div> 
         <section className='container-result'>
             <ResultScanner />
@@ -34,7 +36,7 @@ function ContainerApp() {
             <FilterScanner />
         </section>
         <section className='container-record'>
-            <CamaraScanner handleScan={_onDetected}/>
+          {initButton ? <CamaraScanner /> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconCamera  size={50} color='white'/></button>}  
         </section>
     </main>
   )

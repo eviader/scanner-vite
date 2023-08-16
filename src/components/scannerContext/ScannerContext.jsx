@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { query, orderBy, collection,  onSnapshot, deleteDoc, doc, updateDoc, addDoc } from 'firebase/firestore'
+import { query, orderBy, collection,  onSnapshot, deleteDoc, doc, where, updateDoc, addDoc, getDocs } from 'firebase/firestore'
 import { db } from "../firebase/firebase";
 
 export const ScannerContext = createContext()
@@ -9,16 +9,16 @@ export function ScannerContextProvider(props){
     const [articul, setArticul] = useState([])
     const [filterArticul, setFilterArticul] = useState([])
 
-    
     useEffect(() => {
         getAll()
     },[])
 
     async function getAll(){
-      const geArticuls =  collection(db, "articulos")
+
+      const getArticuls =  collection(db, "articulos")
 
       try{
-        onSnapshot(geArticuls, querySnapshot => {
+        onSnapshot(getArticuls, querySnapshot => {
           const dataArray = []
           querySnapshot.forEach(doc => {
           dataArray.push({...doc.data(), id: doc.id})
@@ -55,20 +55,46 @@ export function ScannerContextProvider(props){
         }
         console.log("Stock Agregado")
       }catch(err){
-        console.err(err)
+        console.error(err)
       }
-
     }
+    
 
     async function filterContext(textFilter){
-      const result = articul.filter(art => art.codAlt.includes(textFilter.toUpperCase()))
-      setFilterArticul(result)
+      console.log(articul.length)
+      console.log(textFilter)
+      try{
+        const result = articul.filter(art => art.articulo.includes(textFilter.toUpperCase()))
+          setFilterArticul(result)
+      }catch(err){
+        console.error(err)
+      }
     }
 
-    async function filterAlternativeContext(textFilter){
-      const result = articul.filter(art => art.articulo.includes(textFilter.toUpperCase()))
-      setFilterArticul(result)
+    function activeButtton(active){
+      return active
     }
+
+    async function filterScannerContext(code){
+      try{
+        const q = query(collection(db, "articulos"), where("codAlter", "==", code));
+
+        const querySnapshot = await getDocs(q);
+        const data = []
+        querySnapshot.forEach((doc) => {
+          data.push({...doc.data(), id: doc.id})
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+        });
+        setFilterArticul(data)
+        activeButtton(false)
+
+      }catch(err){
+        console.error(err)
+      }
+    }
+
+    
 
     return(
         <ScannerContext.Provider value={
@@ -77,8 +103,7 @@ export function ScannerContextProvider(props){
               filterArticul,
               filterContext,
               getFiles,
-              filterAlternativeContext
-            
+              filterScannerContext
             }
         }>
             {props.children}

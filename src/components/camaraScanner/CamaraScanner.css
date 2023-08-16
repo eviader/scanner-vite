@@ -1,5 +1,33 @@
 video{
     display: flex;
-    height: 100%;
-    width: 70%;
+    aspect-ratio: 4/3;
+}
+
+.viewport{
+    position: absolute;
+    aspect-ratio: 4/3;
+}
+
+.activeCam{
+    position: relative;
+    align-self: center;
+    left: 30%;
+    border-radius: 50%;
+    border: none;
+    background-color: #628D2A;
+    height: 150px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.rotate-cam{
+    z-index: 55;
+    position: absolute;
+    left: 78%;
+    margin: 8px;
+    background-color: #628D2A;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: #fff solid 0.5px ;
 }
