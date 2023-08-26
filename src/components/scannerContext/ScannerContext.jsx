@@ -23,9 +23,9 @@ export function ScannerContextProvider(props){
           querySnapshot.forEach(doc => {
           dataArray.push({...doc.data(), id: doc.id})
         })
-        const filterUndefined = dataArray.filter(element => element !== undefined);
-        setArticul(filterUndefined)
-        })
+        const filterUndefined = dataArray.filter(element => element.articulo !== null || undefined);
+        setArticul(filterUndefined)     
+       })
       }catch(err){
         console.error(err)
       }
@@ -61,18 +61,19 @@ export function ScannerContextProvider(props){
     
 
     async function filterContext(textFilter){
-      console.log(articul.length)
-      console.log(textFilter)
       try{
         const result = articul.filter(art => art.articulo.includes(textFilter.toUpperCase()))
-          setFilterArticul(result)
+        const dataSort = result.sort((a, b) => {
+          if( a.articulo == b.articulo){
+            return 0
+          }if(a.articulo < b.articulo){
+            return -1
+          }return 1
+        })  
+        setFilterArticul(dataSort)
       }catch(err){
         console.error(err)
       }
-    }
-
-    function activeButtton(active){
-      return active
     }
 
     async function filterScannerContext(code){
@@ -87,14 +88,11 @@ export function ScannerContextProvider(props){
           console.log(doc.id, " => ", doc.data());
         });
         setFilterArticul(data)
-        activeButtton(false)
 
       }catch(err){
         console.error(err)
       }
     }
-
-    
 
     return(
         <ScannerContext.Provider value={

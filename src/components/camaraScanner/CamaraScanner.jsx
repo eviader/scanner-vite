@@ -26,8 +26,8 @@ function CamaraScanner() {
       inputStream: {
         type: 'LiveStream',
         constraints: {
-          width: 320,
-          height: 480,
+          width: 380,
+          height: 380,
           facingMode: camR ? "user" : "environment", // Puedes cambiarlo según la cámara que desees utilizar
 
         },

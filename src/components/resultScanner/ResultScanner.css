@@ -1,13 +1,14 @@
 @media screen and (max-width: 700px){
     .section-articul{
+        position: absolute;
         display: grid;
         grid-template-columns: 65% 35%;
         align-content: center;
         justify-content: center;
         color: #F8FCF4;
-        background-color: #8CC63F;
+        background-color: #628D2A;
         opacity: 0.89;
-        max-height: 90%;
+        max-height: 30%;
         width: 90%;
         border-radius: 8px;
         overflow-y: scroll;
