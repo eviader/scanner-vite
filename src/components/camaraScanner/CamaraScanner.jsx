@@ -1,7 +1,6 @@
 import './CamaraScanner.css'
 import Quagga  from "quagga"
 import styled from 'styled-components'
-import config from './config.json'
 import { IconTags, IconCamera, IconCameraRotate   } from '@tabler/icons-react';
 import { useEffect, useContext, useState, useMemo } from "react"
 import { ScannerContext } from '../scannerContext/ScannerContext'

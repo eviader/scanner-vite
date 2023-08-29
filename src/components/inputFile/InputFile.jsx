@@ -9,13 +9,14 @@ function InputFile() {
 
     const handleInput = async (e) => {
         const excelData = await readXlsxFile(e.files[0])
-        getFiles(excelData)
+        console.log(excelData)
+        //getFiles(excelData)
     }
 
     return (
     <>
         <Navigation />
-        <input className='input-file'  onChange={(e) => handleInput(e.target)} type="file" name="excel-file" />
+        <input type="file" onChange={(e) => handleInput(e.target)} name="xls" id="file-xls" />
     </>
   )
 }
