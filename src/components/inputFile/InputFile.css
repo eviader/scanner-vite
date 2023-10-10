@@ -3,3 +3,16 @@
     justify-content: center;
     align-items: center;
 }
+
+.nav-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-navigation{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 2rem;
+}

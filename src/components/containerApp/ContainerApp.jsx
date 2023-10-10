@@ -1,34 +1,23 @@
 import './ContainerApp.css'
-import { useState, useContext } from 'react';
-import { IconCamera } from '@tabler/icons-react';
 import ResultScanner from '../resultScanner/ResultScanner';
 import FilterScanner from '../filterScanner/FilterScanner';
 import Navigation from '../navigation/Navigation';
 import CamaraScanner from '../camaraScanner/CamaraScanner';
-import { ScannerContext } from '../scannerContext/ScannerContext';
-import { useEffect, useMemo, useRef } from 'react';
-
+import { IconCamera } from '@tabler/icons-react';
+import { useState} from 'react'
 
 function ContainerApp() {
-  const { activeButtton } = useContext(ScannerContext)
-  const [initButton, setInitButton] = useState(true)
+const [initButton, setInitButton] = useState(false)
 
-
-  useEffect(() =>{
-    initButton
-    setInitButton(activeButtton)
-  },[])
-
-  const handleCam = () => {
-    setInitButton(true)
-  }
-  
+const handleCam = (cam) => {
+  setInitButton(cam)
+}
 
   return (
     <main className='main-container'>
-        <div className='container-header'>
+        <nav className='container-header'>
             <Navigation />
-        </div> 
+        </nav> 
         <section className='container-result'>
             <ResultScanner />
         </section>
@@ -36,7 +25,7 @@ function ContainerApp() {
             <FilterScanner />
         </section>
         <section className='container-record'>
-          {initButton ? <CamaraScanner /> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconCamera  size={50} color='white'/></button>}  
+          {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconCamera  size={50} color='white'/></button>}
         </section>
     </main>
   )

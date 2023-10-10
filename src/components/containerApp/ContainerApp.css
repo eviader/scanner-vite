@@ -10,13 +10,14 @@
     }
 
     .container-header{
-        position: relative;
+        display: flex;
+        justify-content: center;
+        padding-top: 1rem;
     }
 
     a{
         color: #fff;
         text-decoration: none;
-
     }
    
     .container-result{
@@ -24,7 +25,7 @@
         align-items: center;
         justify-content: center;
         color: #333333;
-        max-height: 30vh;
+        max-height: 28vh;
     }
 
     .container-input{

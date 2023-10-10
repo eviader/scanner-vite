@@ -1,11 +1,10 @@
 import './CamaraScanner.css'
 import Quagga  from "quagga"
-import styled from 'styled-components'
-import { IconTags, IconCamera, IconCameraRotate   } from '@tabler/icons-react';
+import { IconTags, IconCamera, IconCameraRotate } from '@tabler/icons-react';
 import { useEffect, useContext, useState, useMemo } from "react"
 import { ScannerContext } from '../scannerContext/ScannerContext'
 
-function CamaraScanner() {
+function CamaraScanner({handleCam}) {
   const [camR, setCamR] = useState(false)
   const { filterScannerContext } = useContext(ScannerContext)
 
@@ -18,8 +17,11 @@ function CamaraScanner() {
     }
   }
 
-  useEffect(() => {
+  const camStop = () => {
+    setInitButton(false)
+  } 
 
+  useEffect(() => {
     // Configuración de Quagga (pueden variar según la documentación de la librería)
     const config = {
       inputStream: {
@@ -64,10 +66,9 @@ function CamaraScanner() {
       if(data){
         const dataCode = data.codeResult.code
         filterScannerContext(dataCode)
+        handleCam(false)
       }
     });
-
-    // Limpiar Quagga al desmontar el componente
 
   }, [camR]);
 
@@ -75,6 +76,7 @@ function CamaraScanner() {
     <>
       <button className='rotate-cam' onClick={handleRotateCam}><IconCameraRotate color='white'/></button>
       <div id="interactive" className="viewport" />
+      
     </>
   );
 };

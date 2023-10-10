@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { query, orderBy, collection,  onSnapshot, deleteDoc, doc, where, updateDoc, addDoc, getDocs } from 'firebase/firestore'
+import { query, orderBy, collection,  onSnapshot, deleteDoc, doc, where, updateDoc, addDoc, getDocs,getDoc } from 'firebase/firestore'
 import { db } from "../firebase/firebase";
 
 export const ScannerContext = createContext()
@@ -33,9 +33,10 @@ export function ScannerContextProvider(props){
 
     async function deleteCollection(){
       try{
-        articul.forEach(idArt =>  {
+        await articul.forEach(idArt =>  {
           deleteDoc(doc(db, "articulos", idArt.id));
-      })
+        })
+        console.log('borrando base de datos')
       }catch(err){
         console.log(err)
       }
@@ -44,7 +45,7 @@ export function ScannerContextProvider(props){
     async function getFiles(files){
       try{   
         deleteCollection()
-
+        console.log('agregando nuevos datos')
         for(let i = 0; i < files.length; i++){
           const newData = await addDoc(collection(db, "articulos"),{
             articulo: files[i][0],
@@ -87,7 +88,7 @@ export function ScannerContextProvider(props){
           // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data());
         });
-        setFilterArticul(data)
+        setFilterArticul([...data])
 
       }catch(err){
         console.error(err)

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 function Navigation() {
   return (
-    <div className='nav-bar'>
+    <div className='nav-bar-component'>
         <Link to='/'><h3>Scanner</h3></Link>
         <Link to='/carga'><h3>Stock</h3></Link>
     </div>

@@ -13,5 +13,17 @@
     border-radius: 50%;
     height: 50px;
     width: 50px;
-    border: #fff solid 0.5px ;
+    border: rgb(95, 92, 92) solid 0.5px ;
+}
+
+.activeCam{
+    z-index: 55;
+    position: relative;
+    align-self: center;
+    border-radius: 50%;
+    border: none;
+    background-color: #628D2A;
+    height: 150px;
+    width: 150px;
+    cursor: pointer;
 }
