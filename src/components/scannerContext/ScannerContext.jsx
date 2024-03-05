@@ -8,6 +8,8 @@ export function ScannerContextProvider(props){
 
     const [articul, setArticul] = useState([])
     const [filterArticul, setFilterArticul] = useState([])
+    const [loadingUpdate, setLoadingUpdate] = useState(false)
+    const [loadingcComplete, setLoadingComplete] = useState(false)
 
     useEffect(() => {
         getAll()
@@ -44,8 +46,9 @@ export function ScannerContextProvider(props){
 
     async function getFiles(files){
       try{   
-        deleteCollection()
+        await deleteCollection()
         console.log('agregando nuevos datos')
+        setLoadingUpdate(true)
         for(let i = 0; i < files.length; i++){
           const newData = await addDoc(collection(db, "articulos"),{
             articulo: files[i][0],
@@ -55,6 +58,8 @@ export function ScannerContextProvider(props){
           })
         }
         console.log("Stock Agregado")
+        loadingUpdate(false)
+        setLoadingComplete[true]
       }catch(err){
         console.error(err)
       }
@@ -102,7 +107,9 @@ export function ScannerContextProvider(props){
               filterArticul,
               filterContext,
               getFiles,
-              filterScannerContext
+              filterScannerContext,
+              loadingUpdate,
+              loadingcComplete
             }
         }>
             {props.children}
