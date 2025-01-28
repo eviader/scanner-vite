@@ -4,7 +4,7 @@
     .main-container{
         display: grid;
         grid-template-rows: 15% 30% 10% 45% ;
-        background-color: #383C33;
+        background-color: #F4F4F4;
         min-height: 100vh;
         overflow: hidden;
     }

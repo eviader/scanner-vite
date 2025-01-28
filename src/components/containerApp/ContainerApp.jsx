@@ -3,6 +3,7 @@ import ResultScanner from '../resultScanner/ResultScanner';
 import FilterScanner from '../filterScanner/FilterScanner';
 import Navigation from '../navigation/Navigation';
 import CamaraScanner from '../camaraScanner/CamaraScanner';
+import ImgProduct from '../imgProduct/ImgProduct';
 import { IconCamera } from '@tabler/icons-react';
 import { useState} from 'react'
 
@@ -21,8 +22,12 @@ const handleCam = (cam) => {
         <section className='container-result'>
             <ResultScanner />
         </section>
+       
         <section className='container-input'>
             <FilterScanner />
+        </section>
+        <section>
+          <ImgProduct />
         </section>
         <section className='container-record'>
           {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconCamera  size={50} color='white'/></button>}

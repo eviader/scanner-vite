@@ -7,7 +7,7 @@
     }
 
     .filter-input{
-        width: 100%;
+        height: 50px;
         font-size: 25px;
         text-align: center;
         background-color: #4D5246;
@@ -17,6 +17,7 @@
     }
 
     .button-filter{
+        height: 54px;
         background-color: #4D5246;
         border-radius: 0px 10px 10px 0px;
         border: 1px solid #4D5246;
