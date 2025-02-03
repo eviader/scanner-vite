@@ -3,9 +3,9 @@
 
     .main-container{
         display: grid;
-        grid-template-rows: 15% 30% 10% 45% ;
+        grid-template-rows: 10% 30% 15% 25% 20% ;
         background-color: #F4F4F4;
-        min-height: 100vh;
+        height: 100vh;
         overflow: hidden;
     }
 
@@ -13,6 +13,7 @@
         display: flex;
         justify-content: center;
         padding-top: 1rem;
+        opacity: 0.8;
     }
 
     a{
@@ -33,14 +34,22 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        opacity: 0.8;
     }
 
     .container-record{
         display: flex; 
         justify-content: center;
-        background-color: #383C33 ;
+        background-color: #F4F4F4 ;
         opacity: 0.8;
         object-fit: contain;
+    }
+
+    .img-product{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-height: 28vh;
     }
 
     .activeCam{

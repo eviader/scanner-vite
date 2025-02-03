@@ -22,19 +22,19 @@ function ImgProduct() {
     console.log(code + color)
 
   return (
-   <>
+  <>
 
    {
     filterArticul.map(art => (
       <>
         <div>
-          <img src={`https://image1.lacoste.com/dw/image/v2/AAQM_PRD/on/demandware.static/Sites-FR-Site/Sites-master/fr/dwd4a133ad/${code}_${color}_24.jpg?imwidth=67&impolicy=pctp`} alt="product-img" />
+          <img src={`https://image1.lacoste.com/dw/image/v2/AAQM_PRD/on/demandware.static/Sites-FR-Site/Sites-master/fr/dwd4a133ad/${code}_${color}_24.jpg?imwidth=87&impolicy=pctp`} alt="product-img" />
         </div>
       </>
     ))
    }
     
-   </>
+  </>
   )
 }
 

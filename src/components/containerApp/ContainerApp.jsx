@@ -22,15 +22,14 @@ const handleCam = (cam) => {
         <section className='container-result'>
             <ResultScanner />
         </section>
-       
         <section className='container-input'>
             <FilterScanner />
         </section>
-        <section>
+        <section className='img-product'>
           <ImgProduct />
         </section>
         <section className='container-record'>
-          {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconCamera  size={50} color='white'/></button>}
+          {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconCamera  size={30} color='white'/></button>}
         </section>
     </main>
   )
