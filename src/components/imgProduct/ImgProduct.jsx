@@ -1,44 +1,42 @@
-import './ImgProduct.css'
-import {useContext, useEffect} from 'react'
-import { ScannerContext } from '../scannerContext/ScannerContext'
-
+import './ImgProduct.css';
+import { useContext, useEffect, useState } from 'react';
+import { ScannerContext } from '../scannerContext/ScannerContext';
 
 function ImgProduct() {
-    const { filterArticul } = useContext(ScannerContext)
-    
-    //filterArticul.map( art =>( 
-      //(art.articulo.substring(8, 11))
-      //(art.articulo.substring(1, 6))
-    //))
+  const { filterArticul } = useContext(ScannerContext)
+  const [ uniqueProduct, setUniqueProduct ] = useState([])
 
-    const color = filterArticul.map( art =>( 
-      (art.articulo.substring(8, 11))
-
-    ))
-    const code =     filterArticul.map( art =>( 
-      (art.articulo.substring(0, 6))
-    ))
+  useEffect(() => {
     
-    console.log(code + color)
+    const newProduct = filterArticul.map(art => {
+      const color = art.articulo.substring(8, 11)
+      const code = art.articulo.substring(0, 6)
+        return {id : color, code: code, color: color}
+      })
+
+    const deleteRepitproduct = [...new Map(newProduct.map(item => [item.id, item])).values()];
+    setUniqueProduct(deleteRepitproduct)
+  
+  }, [filterArticul])
+
 
   return (
-  <>
+    <>
+      {
 
-   {
-    filterArticul.map(art => (
-      <>
-        <div>
-          <img src={`https://image1.lacoste.com/dw/image/v2/AAQM_PRD/on/demandware.static/Sites-FR-Site/Sites-master/fr/dwd4a133ad/${code}_${color}_24.jpg?imwidth=87&impolicy=pctp`} alt="product-img" />
+      uniqueProduct.map(art => (
+        <div className="container-img" key={art.id}>
+          <img src={`https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw54416a1e/${art.code}_${art.color}_24.jpg?imwidth=53&impolicy=pctp`} />
+          <p className='code-art'>{art.color}</p>
         </div>
-      </>
-    ))
-   }
-    
-  </>
-  )
+      ))
+      
+      }
+    </>
+  );
 }
 
-export default ImgProduct
+export default ImgProduct;
 
 
       

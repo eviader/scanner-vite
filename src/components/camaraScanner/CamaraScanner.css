@@ -18,11 +18,10 @@
 
 .activeCam{
     z-index: 55;
-    position: relative;
     border-radius: 50%;
     border: none;
     background-color: #628D2A;
-    height: 100px;
-    width: 100px;
+    height: 60px;
+    width: 60px;
     cursor: pointer;
 }

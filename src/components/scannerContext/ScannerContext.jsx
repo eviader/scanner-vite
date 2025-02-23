@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { query, orderBy, collection,  onSnapshot, deleteDoc, doc, where, updateDoc, addDoc, getDocs,getDoc } from 'firebase/firestore'
+import { query, orderBy, collection,  onSnapshot, deleteDoc, doc, where, updateDoc, addDoc, getDocs,getDoc, startAt, endAt, getFirestore } from 'firebase/firestore'
 import { db } from "../firebase/firebase";
 
 export const ScannerContext = createContext()
@@ -26,12 +26,14 @@ export function ScannerContextProvider(props){
           dataArray.push({...doc.data(), id: doc.id})
         })
         const filterUndefined = dataArray.filter(element => element.articulo !== null || undefined);
-        setArticul(filterUndefined)     
+        setArticul(filterUndefined) 
        })
       }catch(err){
         console.error(err)
       }
     }
+
+
 
     async function deleteCollection(){
       try{
@@ -64,6 +66,28 @@ export function ScannerContextProvider(props){
         console.error(err)
       }
     }
+
+    //busqueda por articulo Firebase
+
+    const buscarArticulosPorPrefijo = async (code) => {
+      try{
+        console.log(code)
+        const q = query(collection(db, "articulos"), 
+        where("articulo", "==", code));
+
+        const querySnapshot = await getDocs(q);
+        const data = []
+        querySnapshot.forEach((doc) => {
+          data.push({...doc.data(), id: doc.id})
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+        });
+        console.log(data)
+
+      }catch(err){
+        console.error(err)
+      }
+    };
     
 
     async function filterContext(textFilter){
@@ -109,7 +133,9 @@ export function ScannerContextProvider(props){
               getFiles,
               filterScannerContext,
               loadingUpdate,
-              loadingcComplete
+              loadingcComplete,
+              buscarArticulosPorPrefijo
+
             }
         }>
             {props.children}
