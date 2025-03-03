@@ -16,11 +16,12 @@
         border: 1px solid #4D5246;
         color: #F8FCF4;
         opacity: 0.8;
+        border-radius: 0%;
     }
 
     .button-filter{
         position: absolute;
-        right: 0;
+        right: 10px;
         height: 54px;
         background-color: transparent;
         border: transparent;

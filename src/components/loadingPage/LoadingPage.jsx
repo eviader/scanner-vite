@@ -1,117 +1,115 @@
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import "./LoadingPage.css";
+import './LoadingPage.css'
+import { useEffect, useState } from "react"
+import { motion, useAnimation } from "framer-motion"
+
+
+const getRotationTransition = (duration, from, loop = true) => ({
+  from: from,
+  to: from + 360,
+  ease: "linear",
+  duration: duration,
+  type: "tween",
+  repeat: loop ? Infinity : 0,
+});
+
+const getTransition = (duration, from) => ({
+  rotate: getRotationTransition(duration, from),
+  scale: {
+    type: "spring",
+    damping: 20,
+    stiffness: 300,
+  },
+});
 
 const LoadingPage = ({
-  sentence = "Iniciando . . .",
-  manualMode = false,
-  blurAmount = 5,
-  borderColor = "green",
-  glowColor = "rgba(0, 255, 0, 0.6)",
-  animationDuration = 0.5,
-  pauseBetweenAnimations = 1,
+  text = "INICIANDO - SCANNER - LACOSTE -",
+  spinDuration = 10,
+  onHover = "speedUp",
+  className = "",
 }) => {
-  const words = sentence.split(" ");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [lastActiveIndex, setLastActiveIndex] = useState(null);
-  const containerRef = useRef(null);
-  const wordRefs = useRef([]);
-  const [focusRect, setFocusRect] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const letters = Array.from(text);
+  const controls = useAnimation();
+  const [currentRotation, setCurrentRotation] = useState(0);
 
   useEffect(() => {
-    if (!manualMode) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % words.length);
-      }, (animationDuration + pauseBetweenAnimations) * 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [manualMode, animationDuration, pauseBetweenAnimations, words.length]);
-
-  useEffect(() => {
-    if (currentIndex === null || currentIndex === -1) return;
-
-    if (!wordRefs.current[currentIndex] || !containerRef.current) return;
-
-    const parentRect = containerRef.current.getBoundingClientRect();
-    const activeRect = wordRefs.current[currentIndex].getBoundingClientRect();
-
-    setFocusRect({
-      x: activeRect.left - parentRect.left,
-      y: activeRect.top - parentRect.top,
-      width: activeRect.width,
-      height: activeRect.height,
+    controls.start({
+      rotate: currentRotation + 360,
+      scale: 1,
+      transition: getTransition(spinDuration, currentRotation),
     });
-  }, [currentIndex, words.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [spinDuration, controls, onHover, text]);
 
-  // Handlers for manual mode (hover)
-  const handleMouseEnter = (index) => {
-    if (manualMode) {
-      setLastActiveIndex(index);
-      setCurrentIndex(index);
+  const handleHoverStart = () => {
+    if (!onHover) return;
+    switch (onHover) {
+      case "slowDown":
+        controls.start({
+          rotate: currentRotation + 360,
+          scale: 1,
+          transition: getTransition(spinDuration * 2, currentRotation),
+        });
+        break;
+      case "speedUp":
+        controls.start({
+          rotate: currentRotation + 360,
+          scale: 1,
+          transition: getTransition(spinDuration / 4, currentRotation),
+        });
+        break;
+      case "pause":
+        controls.start({
+          rotate: currentRotation,
+          scale: 1,
+          transition: {
+            rotate: { type: "spring", damping: 20, stiffness: 300 },
+            scale: { type: "spring", damping: 20, stiffness: 300 },
+          },
+        });
+        break;
+      case "goBonkers":
+        controls.start({
+          rotate: currentRotation + 360,
+          scale: 0.8,
+          transition: getTransition(spinDuration / 20, currentRotation),
+        });
+        break;
+      default:
+        break;
     }
   };
 
-  const handleMouseLeave = () => {
-    if (manualMode) {
-      setCurrentIndex(lastActiveIndex);
-    }
+  const handleHoverEnd = () => {
+    controls.start({
+      rotate: currentRotation + 360,
+      scale: 1,
+      transition: getTransition(spinDuration, currentRotation),
+    });
   };
 
   return (
-    <div className="focus-container" ref={containerRef}>
-      {words.map((word, index) => {
-        const isActive = index === currentIndex;
+    <motion.div
+      initial={{ rotate: 0 }}
+      className={`circular-text ${className}`}
+      animate={controls}
+      onUpdate={(latest) => setCurrentRotation(Number(latest.rotate))}
+      onMouseEnter={handleHoverStart}
+      onMouseLeave={handleHoverEnd}
+    >
+      {letters.map((letter, i) => {
+        const rotation = (360 / letters.length) * i;
+        const factor = Number((Math.PI / letters.length).toFixed(0));
+        const x = factor * i;
+        const y = factor * i;
+        const transform = `rotateZ(${rotation}deg) translate3d(${x}px, ${y}px, 0)`;
+
         return (
-          <span
-            key={index}
-            ref={(el) => (wordRefs.current[index] = el)}
-            className={`focus-word ${manualMode ? "manual" : ""} ${isActive && !manualMode ? "active" : ""
-              }`}
-            style={{
-              filter:
-                manualMode
-                  ? isActive
-                    ? `blur(0px)`
-                    : `blur(${blurAmount}px)`
-                  : isActive
-                    ? `blur(0px)`
-                    : `blur(${blurAmount}px)`,
-              "--border-color": borderColor,
-              "--glow-color": glowColor,
-              transition: `filter ${animationDuration}s ease`,
-            }}
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
-          >
-            {word}
+          <span key={i} style={{ transform, WebkitTransform: transform }}>
+            {letter}
           </span>
         );
       })}
-
-      <motion.div
-        className="focus-frame"
-        animate={{
-          x: focusRect.x,
-          y: focusRect.y,
-          width: focusRect.width,
-          height: focusRect.height,
-          opacity: currentIndex >= 0 ? 1 : 0,
-        }}
-        transition={{
-          duration: animationDuration,
-        }}
-        style={{
-          "--border-color": borderColor,
-          "--glow-color": glowColor,
-        }}
-      >
-        <span className="corner top-left"></span>
-        <span className="corner top-right"></span>
-        <span className="corner bottom-left"></span>
-        <span className="corner bottom-right"></span>
-      </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

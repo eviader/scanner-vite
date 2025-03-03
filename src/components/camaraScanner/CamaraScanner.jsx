@@ -27,8 +27,9 @@ function CamaraScanner({handleCam}) {
       inputStream: {
         type: 'LiveStream',
         constraints: {
-          width: 380,
-          height: 380,
+          aspectRatio: 1.777777778, // Relación de aspecto 16:9
+          width: { min: 640, ideal: 1280, max: 1920 },
+          height: { min: 480, ideal: 720, max: 1080 },
           facingMode: camR ? "user" : "environment", // Puedes cambiarlo según la cámara que desees utilizar
 
         },
@@ -48,7 +49,7 @@ function CamaraScanner({handleCam}) {
         readers: ['ean_reader', 'upc_reader'],
       },
       locate: false,
-      frecuency: 2,
+      frecuency: 4,
 
     };
 

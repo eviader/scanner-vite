@@ -56,7 +56,8 @@ export function ScannerContextProvider(props){
             articulo: files[i][0],
             descripcion: files[i][1],
             precio: files[i][2],
-            codAlter: files[i][3]
+            stock: files[i][3],
+            codAlter: files[i][4]
           })
         }
         console.log("Stock Agregado")
@@ -71,7 +72,6 @@ export function ScannerContextProvider(props){
 
     const buscarArticulosPorPrefijo = async (code) => {
       try{
-        console.log(code)
         const q = query(collection(db, "articulos"), 
         where("articulo", "==", code));
 

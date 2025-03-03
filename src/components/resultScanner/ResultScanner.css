@@ -2,14 +2,12 @@
     .section-articul{
         position: absolute;
         display: grid;
-        grid-template-columns: 65% 35%;
-        align-content: center;
-        justify-content: center;
+        grid-template-columns: 52% 35% 13%;
+        max-height: 24%;
+        width: 90%;
         color: #F8FCF4;
         background-color: #628D2A;
         opacity: 0.89;
-        max-height: 24%;
-        width: 90%;
         border-radius: 8px;
         overflow-y: scroll;
         border: solid 1px #628D2A;
@@ -31,8 +29,17 @@
         border: solid 1px #203306;
         background-color:  #416117;
     }
+
+    .container-stock{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: solid 1px #203306;
+        background-color:  #416117;
+    }
     
-    .articule, .price {
+    
+    .articule, .price, .stock {
         font-size: 1.2rem;
         margin: 3px;
         align-self: center;

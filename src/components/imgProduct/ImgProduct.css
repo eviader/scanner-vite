@@ -1,3 +1,11 @@
+.main-conteiner-img{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto; 
+    overflow-y: hidden;
+    padding: 50px;
+}
 
 .code-art{
     position: relative;

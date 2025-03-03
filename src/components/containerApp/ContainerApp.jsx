@@ -4,7 +4,7 @@ import FilterScanner from '../filterScanner/FilterScanner';
 import Navigation from '../navigation/Navigation';
 import CamaraScanner from '../camaraScanner/CamaraScanner';
 import ImgProduct from '../imgProduct/ImgProduct';
-import LoadingPages from '../loadingPage/LoadingPage';
+import LoadingPage from '../loadingPage/LoadingPage';
 import { ScannerContext } from '../scannerContext/ScannerContext'
 import { IconCamera } from '@tabler/icons-react';
 import { useState, useContext, useEffect } from 'react'
@@ -23,14 +23,12 @@ useEffect(() => {
   if(articul.length != 0){
     setInitPage(false)
   }
-
-     console.log("aqui")
 },[articul])
 
   return (
     <>
  {  initPage ? 
-    <section className='loading'> <LoadingPages /></section> :
+    <section className='loading'> <LoadingPage /></section> :
     <main className='main-container'>
       <nav className='container-header'>
           <Navigation />

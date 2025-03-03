@@ -17,6 +17,9 @@ function ResultScanner() {
               <div className='container-price'>
                 <h1 className='price'>${art.precio}</h1>
               </div>
+              <div className='container-stock'>
+                <h1 className='stock'>{art.stock}</h1>
+              </div>
             </>
           ))
         }
