@@ -8,15 +8,23 @@ function ImgProduct() {
 
   useEffect(() => {
     const newProduct = filterArticul.map(art => {
-      if(art.articulo.substring(0,1) == "L"){
+      if(art.articulo.substring(0,1) === "L"){
         const color = art.articulo.substring(8, 11)
         const code = art.articulo.substring(0, 5)
-        return {id : color, code: code, color: color}
+        return {id : color, code: code, color: color, webcode: "24"}
       }
+      
+      if(art.articulo.substring(0,1) === "7"){
+        const color = art.articulo.substring(10, 13)
+        const code = art.articulo.substring(1, 10)
+        console.log(code, color)
+        return {id : color, code: code, color: color, webcode: "01"}
+      }
+
       const color = art.articulo.substring(8, 11)
       const code = art.articulo.substring(0, 6)
         
-      return {id : color, code: code, color: color}
+      return {id : color, code: code, color: color, webcode: "24"}
       })
 
     const deleteRepitproduct = [...new Map(newProduct.map(item => [item.id, item])).values()];
@@ -30,7 +38,7 @@ function ImgProduct() {
       <section className='main-conteiner-img'>
       {uniqueProduct.map(art => (
         <div className="container-img" key={art.id}>
-          <img src={`https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw54416a1e/${art.code}_${art.color}_24.jpg?imwidth=53&impolicy=pctp`} />
+          <img src={`https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw54416a1e/${art.code}_${art.color}_${art.webcode}.jpg?imwidth=53&impolicy=pctp`} />
           <p className='code-art'>{art.color}</p>
         </div>
       ))}

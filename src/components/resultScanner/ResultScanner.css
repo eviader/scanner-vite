@@ -2,7 +2,7 @@
     .section-articul{
         position: absolute;
         display: grid;
-        grid-template-columns: 52% 35% 13%;
+        grid-template-columns: 55% 33% 12%;
         max-height: 24%;
         width: 90%;
         color: #F8FCF4;
@@ -10,7 +10,6 @@
         opacity: 0.89;
         border-radius: 8px;
         overflow-y: scroll;
-        border: solid 1px #628D2A;
         padding: 2px;
     }
 
