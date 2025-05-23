@@ -31,21 +31,16 @@ useEffect(() => {
     <section className='loading'> <LoadingPage /></section> :
     <main className='main-container'>
       <nav className='container-header'>
-          <Navigation />
           <FilterScanner />
       </nav> 
       <section className='container-result'>
           <ResultScanner />
       </section>
-      
       <section className='img-product'>
         <ImgProduct />
       </section>
       <section className='container-record'>
         {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconCamera  size={30} color='white'/></button>}
-      </section>
-      <section className='max-resposive'>
-        <p>en dispositivo movil</p>
       </section>
     </main> }
     <section className='max-resposive'>

@@ -8,17 +8,20 @@ function ResultScanner() {
   return (
     <>
       <div className='section-articul'>
+      <p>Codigo</p>
+      <p>Precio</p>
+      <p>Stock</p>
         { 
         filterArticul.map( art =>( 
             <>
               <div className='container-articule'>
-                <h2 className='articule'>{art.articulo}</h2>
+                <p className='articule'>{art.articulo}</p>
               </div>
               <div className='container-price'>
-                <h1 className='price'>${art.precio}</h1>
+                <p className='price'>${art.precio}</p>
               </div>
               <div className='container-stock'>
-                <h1 className='stock'>{art.stock}</h1>
+                <p className='stock'>{art.stock}</p>
               </div>
             </>
           ))

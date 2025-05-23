@@ -1,5 +1,12 @@
+:root{
+
+    background-color: #F4F4F4; 
+    font-family: ;
+}
 @media screen and (min-width: 701px){
+
 .max-resposive{
+    text-align: center;
     font-size: 5rem;
     color: #628D2A;
     background-color: #F4F4F4;
@@ -7,6 +14,7 @@
 }
 .main-container{
     display: none;
+    background-color: #F4F4F4;
 }
 
 .loading{
@@ -32,18 +40,16 @@
     .main-container{
         display: grid;
         place-content: center;
-        grid-template-rows: 15% 25% 35% 25% ;
+        grid-template-rows: 8% 25% 32% 35% ;
+        grid-template-columns: 100%;
         background-color: #F4F4F4;
         height: 100vh;
         overflow: hidden;
     }
 
     .container-header{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
         opacity: 0.8;
+        max-width: 100%;
     }
 
     a{
@@ -53,8 +59,8 @@
    
     .container-result{
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         color: #333333;
     }
 
@@ -64,16 +70,20 @@
         align-items: center;
         justify-content: center;
         opacity: 0.8;
+        max-width: 100%;
     }
 
+    /*container donde se mostrara la imagen de la camara */
     .container-record{
         display: flex; 
         justify-content: center;
         background-color: #F4F4F4 ;
-        opacity: 0.8;
-        object-fit: contain;
+        object-fit: cover;
+        height: 95%;
+        width: 95%;
     }
 
+    /*imagenes de productos*/
     .img-product{
         display: flex;
         justify-content: center;

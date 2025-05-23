@@ -7,7 +7,9 @@
     }
 
     .filter-input{
-        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 50px;
         width: 100%;
         font-size: 20px;
