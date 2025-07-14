@@ -99,7 +99,10 @@ export function ScannerContextProvider(props){
           }if(a.articulo < b.articulo){
             return -1
           }return 1
-        })  
+        }) 
+        if(dataSort.length === 0){
+          setFilterArticul(true)
+        } 
         setFilterArticul(dataSort)
       }catch(err){
         console.error(err)

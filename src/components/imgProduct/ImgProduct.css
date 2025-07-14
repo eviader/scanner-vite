@@ -4,22 +4,35 @@
     flex-wrap: nowrap;
     overflow-x: auto; 
     overflow-y: hidden;
-    padding: 30px;
+    padding:0px;
+}
+
+.container-img{
+    display: flex;
+    height: 250px;
+    width: 190px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+
 }
 
 .code-art{
     position: relative;
     text-align: center;
+    width: 80%;
     color: #fff;
     font-weight: 500;
     margin: 0px 10px 0px 10px;
     padding: 0;
-    bottom: 35px;
+    bottom: 25px;
     background-color: #628D2A;
 }
 
 .img-error{
-    width: 100px;
+    width: 50px;
     background-color: #f4f4f4;
-    margin: 30px;
+    margin: 50px;
+    opacity: 0.5;
 }

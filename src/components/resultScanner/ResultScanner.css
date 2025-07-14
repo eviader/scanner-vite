@@ -1,12 +1,18 @@
 @media screen and (max-width: 700px){
-    p{
+
+
+    .title-columns{
+        position: sticky;
+        top: -2px;
+        background-color: #628D2A;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: space-around;
         padding: 0;
         margin: 0;
         font-size: 1rem;
+        border: solid 1px #203306;
     }
+
     .section-articul{
         position: absolute;
         display: grid;

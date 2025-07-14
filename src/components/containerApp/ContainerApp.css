@@ -1,7 +1,6 @@
 :root{
 
     background-color: #F4F4F4; 
-    font-family: ;
 }
 @media screen and (min-width: 701px){
 
@@ -88,7 +87,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10px;
         overflow-x: auto;
         overflow-y: hidden;
     }
