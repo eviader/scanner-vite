@@ -22,12 +22,12 @@ function CamaraScanner({handleCam}) {
   } 
 
   useEffect(() => {
-    // Configuración de Quagga (pueden variar según la documentación de la librería)
+    // Configuración de Quagga
     const config = {
       inputStream: {
         type: 'LiveStream',
         constraints: {
-          aspectRatio: { ideal: window.innerWidth / window.innerHeight }, // Intenta con la relación de aspecto del viewport
+          aspectRatio: { ideal: window.innerWidth / window.innerHeight }, //relación de aspecto del viewport
           width: { ideal: window.innerWidth },
           height: { ideal: window.innerHeight },
           facingMode: camR ? "user" : "environment", // Puedes cambiarlo según la cámara que desees utilizar
@@ -38,10 +38,10 @@ function CamaraScanner({handleCam}) {
         halfSample: false,
         debug: true,
         area: { 
-          top: "30%",
-          right: "20%",
-          left: "20%",
-          bottom: "30%"  
+          top: "40%",
+          right: "30%",
+          left: "30%",
+          bottom: "40%"  
         },
       },
       numOfWorkers: navigator.hardwareConcurrency,
@@ -49,7 +49,7 @@ function CamaraScanner({handleCam}) {
         readers: ['ean_reader', 'upc_reader'],
       },
       locate: false,
-      frecuency: 6,
+      frecuency: 8,
 
     };
 

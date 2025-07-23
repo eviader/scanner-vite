@@ -6,34 +6,18 @@ export const ScannerContext = createContext()
 
 export function ScannerContextProvider(props){
 
-    const [articul, setArticul] = useState([])
     const [filterArticul, setFilterArticul] = useState([])
     const [loadingUpdate, setLoadingUpdate] = useState(false)
-    const [loadingcComplete, setLoadingComplete] = useState(false)
+    const [loadingComplete, setLoadingComplete] = useState(false)
+    const [waitArticulContext, setWaitArticulContext] = useState(false) // spinner de estepra en el componente resulScanner
 
-    useEffect(() => {
-        getAll()
-    },[])
-
-    async function getAll(){
-
-      const getArticuls =  collection(db, "articulos")
-
-      try{
-        onSnapshot(getArticuls, querySnapshot => {
-          const dataArray = []
-          querySnapshot.forEach(doc => {
-          dataArray.push({...doc.data(), id: doc.id})
-        })
-        const filterUndefined = dataArray.filter(element => element.articulo !== null || undefined);
-        setArticul(filterUndefined) 
-       })
-      }catch(err){
-        console.error(err)
-      }
-    }
-
-
+    const SIN_RESULTADOS = [{
+      articulo: "SIN RESULTADOS",
+      descripcion: "0",
+      precio: 0,
+      stock: 0,
+      codAlter: "0",
+    }]
 
     async function deleteCollection(){
       try{
@@ -46,6 +30,7 @@ export function ScannerContextProvider(props){
       }
     }
 
+    //Cargamos un archivo excel y lo agregamos a la base de datos (componente inputFile)
     async function getFiles(files){
       try{   
         await deleteCollection()
@@ -69,47 +54,34 @@ export function ScannerContextProvider(props){
     }
 
     //busqueda por articulo Firebase
-
-    const buscarArticulosPorPrefijo = async (code) => {
+    const buscarArticulosPorPrefijo = async (textFilter) => {
+      setWaitArticulContext(true)
+      console.log("estoy aqui")
+      console.log(textFilter)
       try{
         const q = query(collection(db, "articulos"), 
-        where("articulo", "==", code));
+        where("articulo", ">=", textFilter.toUpperCase()),
+        where("articulo", "<", textFilter.toUpperCase() + '\uf8ff'), // '\uf8ff' es un carácter Unicode que garantiza que se incluyan todos los documentos que comienzan con el prefijo.
+        orderBy("articulo")); // Ordenar por el campo para que la consulta funcione correctamente.
 
         const querySnapshot = await getDocs(q);
         const data = []
         querySnapshot.forEach((doc) => {
           data.push({...doc.data(), id: doc.id})
-          // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data());
         });
-        console.log(data)
+        
+        setWaitArticulContext(false) 
+        return setFilterArticul(data)
 
       }catch(err){
         console.error(err)
+        return [] 
       }
     };
-    
-
-    async function filterContext(textFilter){
-      try{
-        const result = articul.filter(art => art.articulo.includes(textFilter.toUpperCase()))
-        const dataSort = result.sort((a, b) => {
-          if( a.articulo == b.articulo){
-            return 0
-          }if(a.articulo < b.articulo){
-            return -1
-          }return 1
-        }) 
-        if(dataSort.length === 0){
-          setFilterArticul(true)
-        } 
-        setFilterArticul(dataSort)
-      }catch(err){
-        console.error(err)
-      }
-    }
 
     async function filterScannerContext(code){
+      setWaitArticulContext(true)
       try{
         const q = query(collection(db, "articulos"), where("codAlter", "==", code));
 
@@ -120,6 +92,10 @@ export function ScannerContextProvider(props){
           // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data());
         });
+        if(data.length == 0){
+          return setFilterArticul(SIN_RESULTADOS)
+        }
+        setWaitArticulContext(false)
         setFilterArticul([...data])
 
       }catch(err){
@@ -128,16 +104,15 @@ export function ScannerContextProvider(props){
     }
 
     return(
-        <ScannerContext.Provider value={
+        <ScannerContext.Provider value= {
             { 
-              articul,
               filterArticul,
-              filterContext,
               getFiles,
               filterScannerContext,
               loadingUpdate,
-              loadingcComplete,
-              buscarArticulosPorPrefijo
+              loadingComplete,
+              buscarArticulosPorPrefijo,
+              waitArticulContext
 
             }
         }>

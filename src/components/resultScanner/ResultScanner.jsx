@@ -1,9 +1,11 @@
 import './ResultScanner.css'
-import {useContext} from 'react'
+import { useContext, useState } from 'react'
 import { ScannerContext } from '../scannerContext/ScannerContext'
+import { BarLoader } from "react-spinners";
 
 function ResultScanner() {
-  const { filterArticul } = useContext(ScannerContext)
+  const { filterArticul, waitArticulContext } = useContext(ScannerContext)
+
 
   return (
     <>
@@ -11,8 +13,9 @@ function ResultScanner() {
       <p className='title-columns'>Codigo</p>
       <p className='title-columns'>Precio</p>
       <p className='title-columns'>Stock</p>
-        {
-          
+      
+
+        { 
           filterArticul.map( art => (  
               <>
                 <div className='container-articule'>
@@ -22,11 +25,18 @@ function ResultScanner() {
                   <p className='price'>${art.precio}</p>
                 </div>
                 <div className='container-stock'>
-                  <p className='stock'>{art.stock + "uni"}</p>
+                  <p className='stock'>{art.stock + "Uni"}</p>
                 </div>
               </>
             ))
           } 
+          {
+            waitArticulContext &&
+            <span className='bar-loader'> 
+              <BarLoader width='1000' color='#4D5246'/>
+            </span>
+          }
+
         </section>  
    
     </>

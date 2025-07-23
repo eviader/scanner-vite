@@ -22,7 +22,7 @@ const getTransition = (duration, from) => ({
 });
 
 const LoadingPage = ({
-  text = "LACOSTE - SCANNER - LACOSTE -",
+  text = " ALTO ROSARIO - SCANNER - LACOSTE -",
   spinDuration = 10,
   onHover = "speedUp",
   className = "",

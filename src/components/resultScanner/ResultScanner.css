@@ -1,61 +1,66 @@
-@media screen and (max-width: 700px){
-
-
-    .title-columns{
-        position: sticky;
-        top: -2px;
-        background-color: #628D2A;
-        display: flex;
-        justify-content: space-around;
-        padding: 0;
-        margin: 0;
-        font-size: 1rem;
-        border: solid 1px #203306;
-    }
-
-    .section-articul{
-        position: absolute;
-        display: grid;
-        grid-template-columns: 51% 34% 15%;
-        max-height: 24%;
-        width: 90%;
-        color: #F8FCF4;
-        background-color: #628D2A;
-        opacity: 0.89;
-        border-radius: 8px;
-        overflow-y: scroll;
-        padding: 2px;
-    }
-
-    .container-articule{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border: solid 1px #203306;
-        background-color:  #416117;
-    }
-
-    .container-price{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border: solid 1px #203306;
-        background-color:  #416117;
-    }
-
-    .container-stock{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border: solid 1px #203306;
-        background-color:  #416117;
-    }
-    
-    
-    .articule, .price, .stock {
-        font-size: 1.1rem;
-        margin: 3px;
-        align-self: center;
-    }
-
+.title-columns{
+    position: sticky;
+    top: -2px;
+    background-color: #628D2A;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    border: solid 1px #203306;
 }
+
+.section-articul{
+    position: absolute;
+    display: grid;
+    grid-template-columns: 51% 34% 15%;
+    max-height: 24%;
+    width: 90%;
+    color: #F8FCF4;
+    background-color: #628D2A;
+    opacity: 0.89;
+    border-radius: 8px;
+    overflow-y: scroll;
+    padding: 2px;
+}
+
+.container-articule{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid 1px #203306;
+    background-color:  #416117;
+}
+
+.container-price{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid 1px #203306;
+    background-color:  #416117;
+}
+
+.container-stock{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid 1px #203306;
+    background-color:  #416117;
+}
+
+
+.articule, .price, .stock {
+    font-size: 1.1rem;
+    margin: 3px;
+    align-self: center;
+}
+
+.bar-loader{
+    display: flex;
+    justify-content: center;
+    height: auto;
+    width: 700px;
+}
+
+
+
