@@ -1,5 +1,5 @@
 import './ImgProduct.css';
-import '../../../public/error-img2.png' 
+import '../../assets/img/error-img2.png' 
 import { useContext, useEffect, useState } from 'react';
 import { ScannerContext } from '../scannerContext/ScannerContext';
 import { ClipLoader } from "react-spinners";
@@ -13,7 +13,7 @@ function ImgProduct() {
 
   useEffect(() => {
 
-    /*en estas condicionaeles controlamos que tipo de articulo filtramos*/
+    // En estas condicionaeles controlamos que tipo de articulo filtramos
     const newProduct = filterArticul.map(art => {
       if (art.articulo.substring(0, 1) === "L") {
         const color = art.articulo.substring(8, 11)
@@ -21,21 +21,21 @@ function ImgProduct() {
         return { id: color, code: code, color: color, webcode: "24" }
       }
 
-      /* N para los marroquineria */
+      // N para los marroquineria 
       if (art.articulo.substring(0, 1) === "N") {
         const color = art.articulo.substring(8, 11)
         const code = art.articulo.substring(0, 8)
         return { id: color, code: code, color: color, webcode: "24" }
       }
 
-      /* 7 para los cazlado */
+      // 7 para los cazlado 
       if (art.articulo.substring(0, 1) === "7") {
         const color = art.articulo.substring(10, 13)
         const code = art.articulo.substring(1, 10)
         console.log(code, color)
         return { id: color, code: code, color: color, webcode: "01" }
       }
-      
+      //Lista de articulos sin resultados
       if (art.articulo.substring(0, 1) === "S") {
         const color = "RESULTADOS"
         const code = "SIN"

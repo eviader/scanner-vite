@@ -20,6 +20,11 @@ export function ScannerContextProvider(props){
       codAlter: "0",
     }]
 
+    //limpiamos la busqueda con esta linea de codigo
+    async function cleanListArticuls() {
+      setFilterArticul([])  
+    }
+
     async function deleteCollection() {
       console.log('Eliminando base de datos');
       try {
@@ -58,6 +63,7 @@ export function ScannerContextProvider(props){
 
     //busqueda por articulo Firebase
     const buscarArticulosPorPrefijo = async (textFilter) => {
+      cleanListArticuls() //Limpiamos la busqueda
       setWaitArticulContext(true)
       console.log(textFilter)
       try{
@@ -88,6 +94,7 @@ export function ScannerContextProvider(props){
     };
 
     async function filterScannerContext(code){
+      cleanListArticuls()
       setWaitArticulContext(true)
       try{
         const q = query(collection(db, "articulos"), where("codAlter", "==", code));
