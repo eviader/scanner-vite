@@ -35,6 +35,12 @@ function ImgProduct() {
         console.log(code, color)
         return { id: color, code: code, color: color, webcode: "01" }
       }
+      
+      if (art.articulo.substring(0, 1) === "S") {
+        const color = "RESULTADOS"
+        const code = "SIN"
+        return { id: color, code: code, color: color, webcode: "01" }
+      }
 
       //en esta lista entran todos los subcodigos sin condicion
       const color = art.articulo.substring(8, 11)
@@ -55,7 +61,7 @@ function ImgProduct() {
   
   const handleImageError = (e, id) => {
     e.target.src = ERROR_IMG;
-    e.target.alt = 'Imagen no encontrada';
+    e.target.alt = 'sin-imagen';
     e.target.className = "img-error";
     setLoadingImgs(prev => ({ ...prev, [id]: false }));
   };

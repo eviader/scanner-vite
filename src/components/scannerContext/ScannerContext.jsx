@@ -11,6 +11,7 @@ export function ScannerContextProvider(props){
     const [loadingComplete, setLoadingComplete] = useState(false)
     const [waitArticulContext, setWaitArticulContext] = useState(false) // spinner de estepra en el componente resulScanner
 
+    //Constante para el caso de que no se encuentre ningun articulo
     const SIN_RESULTADOS = [{
       articulo: "SIN RESULTADOS",
       descripcion: "0",
@@ -19,14 +20,16 @@ export function ScannerContextProvider(props){
       codAlter: "0",
     }]
 
-    async function deleteCollection(){
-      try{
-        await articul.forEach(idArt =>  {
-          deleteDoc(doc(db, "articulos", idArt.id));
-        })
-        console.log('borrando base de datos')
-      }catch(err){
-        console.log(err)
+    async function deleteCollection() {
+      console.log('Eliminando base de datos');
+      try {
+        const querySnapshot = await getDocs(collection(db, "articulos"));
+        querySnapshot.forEach(async (doc) => {
+          await deleteDoc(doc.ref);
+        });
+        console.log('Se elimino correctamente');
+      } catch (err) {
+        console.log(err);
       }
     }
 
@@ -34,7 +37,7 @@ export function ScannerContextProvider(props){
     async function getFiles(files){
       try{   
         await deleteCollection()
-        console.log('agregando nuevos datos')
+        console.log('Agregando nuevos datos')
         setLoadingUpdate(true)
         for(let i = 0; i < files.length; i++){
           const newData = await addDoc(collection(db, "articulos"),{
@@ -46,7 +49,7 @@ export function ScannerContextProvider(props){
           })
         }
         console.log("Stock Agregado")
-        loadingUpdate(false)
+        setLoadingUpdate(false)
         setLoadingComplete[true]
       }catch(err){
         console.error(err)
@@ -56,7 +59,6 @@ export function ScannerContextProvider(props){
     //busqueda por articulo Firebase
     const buscarArticulosPorPrefijo = async (textFilter) => {
       setWaitArticulContext(true)
-      console.log("estoy aqui")
       console.log(textFilter)
       try{
         const q = query(collection(db, "articulos"), 
@@ -70,7 +72,12 @@ export function ScannerContextProvider(props){
           data.push({...doc.data(), id: doc.id})
           console.log(doc.id, " => ", doc.data());
         });
-        
+
+        if(data.length == 0){
+          setWaitArticulContext(false)
+          return setFilterArticul(SIN_RESULTADOS)
+        }
+
         setWaitArticulContext(false) 
         return setFilterArticul(data)
 
@@ -89,7 +96,6 @@ export function ScannerContextProvider(props){
         const data = []
         querySnapshot.forEach((doc) => {
           data.push({...doc.data(), id: doc.id})
-          // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data());
         });
         if(data.length == 0){
