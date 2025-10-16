@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: center;
     background-color: transparent;
-
+    
 }
 
 .code-art{
@@ -36,4 +36,6 @@
     background-color: #f4f4f4;
     margin: 50px;
     opacity: 0.5;
+    overflow: hidden;
+    box-sizing: border-box;
 }

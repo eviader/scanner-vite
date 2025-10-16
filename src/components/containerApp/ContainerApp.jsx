@@ -4,7 +4,7 @@ import FilterScanner from '../filterScanner/FilterScanner';
 import CamaraScanner from '../camaraScanner/CamaraScanner';
 import ImgProduct from '../imgProduct/ImgProduct';
 import LoadingPage from '../loadingPage/LoadingPage';
-import { IconCamera } from '@tabler/icons-react';
+import { IconBarcode } from '@tabler/icons-react';
 import { useState, useContext, useEffect } from 'react'
 
 
@@ -15,12 +15,13 @@ const [initPage, setInitPage] = useState(true)
 
 const handleCam = (cam) => {
   setInitButton(cam)
+  console.log(cam)
 }
 
 useEffect(() => {
   setTimeout(() => {
     setInitPage(false)
-  }, 2000);
+  }, 1000);
 },[])
 
   return (
@@ -29,7 +30,7 @@ useEffect(() => {
     <section className='loading'> <LoadingPage /></section> :
     <main className='main-container'>
       <nav className='container-header'>
-          <FilterScanner />
+          <FilterScanner handleCam = {handleCam}/>
       </nav> 
       <section className='container-result'>
           <ResultScanner />
@@ -38,12 +39,12 @@ useEffect(() => {
         <ImgProduct />
       </section>
       <section className='container-record'>
-        {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconCamera  size={30} color='white'/></button>}
+        {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconBarcode  size={40} color='black'/></button>}
       </section>
     </main> }
 
     <section className='max-resposive'>
-      <p>en dispositivo movil</p>
+      <p>Intentalo en tu movil</p>
     </section>
   </>
 

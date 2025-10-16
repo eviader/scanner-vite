@@ -13,7 +13,7 @@
 .rotate-cam{
     z-index: 55;
     position: absolute;
-    left: 78%;
+    left: 3%;
     margin: 8px;
     background-color: #628D2A;
     border-radius: 50%;
@@ -22,12 +22,17 @@
     border: rgb(95, 92, 92) solid 0.5px ;
 }
 
-.activeCam{
+.stop-cam{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 55;
+    position: absolute;
+    left: 82%;
+    margin: 8px;
+    background-color: transparent;
     border-radius: 50%;
-    border: none;
-    background-color: #628D2A;
-    height: 60px;
-    width: 60px;
-    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    border: transparent solid 0.5px ;
 }

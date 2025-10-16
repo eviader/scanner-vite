@@ -1,4 +1,4 @@
-.title-columns{
+.title-articule, .title-price, .title-stock {
     position: sticky;
     top: -2px;
     background-color: #628D2A;

@@ -31,4 +31,14 @@
         color: #000;
     }
 
+    .button-active-cam-by-filter{
+        position: absolute;
+        right: 60px;
+        height: 54px;
+        background-color: transparent;
+        border: transparent;
+        cursor: pointer;
+        color: #000;
+    }
+
 }

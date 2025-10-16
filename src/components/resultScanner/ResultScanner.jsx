@@ -10,9 +10,9 @@ function ResultScanner() {
   return (
     <>
       <section className='section-articul'>
-      <p className='title-columns'>Codigo</p>
-      <p className='title-columns'>Precio</p>
-      <p className='title-columns'>Stock</p>
+      <p className='title-articule' style={{borderRadius: '6px 0px 0px 6px'}}>Codigo</p>
+      <p className='title-price'>Precio</p>
+      <p className='title-stock' style={{borderRadius: '0 6px 6px 0'}}>Stock</p>
       
 
         { 
@@ -21,10 +21,10 @@ function ResultScanner() {
                 <div className='container-articule'>
                   <p className='articule'>{art.articulo}</p>
                 </div>
-                <div className='container-price'>
+                <div className='container-price' >
                   <p className='price'>${art.precio}</p>
                 </div>
-                <div className='container-stock'>
+                <div className='container-stock' >
                   <p className='stock'>{art.stock + "Uni"}</p>
                 </div>
               </>
