@@ -1,7 +1,7 @@
 .title-articule, .title-price, .title-stock {
     position: sticky;
     top: -2px;
-    background-color: #628D2A;
+    background-color: #00542c;
     display: flex;
     justify-content: space-around;
     padding: 0;
@@ -17,7 +17,7 @@
     max-height: 24%;
     width: 90%;
     color: #F8FCF4;
-    background-color: #628D2A;
+    background-color: #00542c;
     opacity: 0.89;
     border-radius: 8px;
     overflow-y: scroll;
@@ -29,7 +29,7 @@
     flex-direction: column;
     justify-content: center;
     border: solid 1px #203306;
-    background-color:  #416117;
+    background-color:  #00542c;
 }
 
 .container-price{
@@ -37,7 +37,7 @@
     flex-direction: column;
     justify-content: center;
     border: solid 1px #203306;
-    background-color:  #416117;
+    background-color:  #00542c;
 }
 
 .container-stock{
@@ -45,7 +45,7 @@
     flex-direction: column;
     justify-content: center;
     border: solid 1px #203306;
-    background-color:  #416117;
+    background-color:  #00542c;
 }
 
 

@@ -41,4 +41,15 @@
         color: #000;
     }
 
+    .button-clear{
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        height: 54px;
+        background-color: transparent;
+        border: transparent;
+        cursor: pointer;
+        color: #000;
+    }
+
 }

@@ -4,10 +4,11 @@
 }
 @media screen and (min-width: 701px){
 
+
 .max-resposive{
     text-align: center;
     font-size: 5rem;
-    color: #628D2A;
+    color: #00542c;
     background-color: #F4F4F4;
 
 }
@@ -23,6 +24,30 @@
 }
 
 @media screen and (max-width: 700px){
+
+.backgraunde-lacoste-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: 100dvh;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.backgraunde-lacoste{
+    top: 0;
+    left: 0;
+    width: 180%;
+    height: auto;
+    object-fit: cover;
+    z-index: -1;
+    transform: rotate(-35deg) translate(-48%, 40%);
+    opacity: 0.8;
+}
     
     .max-resposive{
         display: none;
@@ -61,6 +86,7 @@
         justify-content: center;
         align-items: center;
         color: #333333;
+        z-index: 1;
     }
 
     .container-input{
@@ -70,16 +96,18 @@
         justify-content: center;
         opacity: 0.8;
         max-width: 100%;
+        z-index: 1;
     }
 
     /*container donde se mostrara la imagen de la camara */
     .container-record{
         display: flex; 
         justify-content: center;
-        background-color: #F4F4F4 ;
+        background-color: transparent; ;
         object-fit: cover;
         height: 100%;
         width: 100%;
+        z-index: 1;
     }
 
     /*imagenes de productos*/
@@ -89,6 +117,8 @@
         align-items: center;
         overflow-x: auto;
         overflow-y: hidden;
+        z-index: 1;
+        background-color: transparent;
     }
 
     }
@@ -104,7 +134,7 @@
         right: 10px;
         border-radius: 50%;
         border: none;
-        background-color: transparent;
-        border: solid 3px #628D2A;
+        border: solid 3px #00542c;
         cursor: pointer;
+        z-index: 1;
     }

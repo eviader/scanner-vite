@@ -5,6 +5,7 @@
     overflow-x: auto; 
     overflow-y: hidden;
     padding:0px;
+    background-color: transparent;
 }
 
 .container-img{
@@ -29,6 +30,7 @@
     padding: 0;
     bottom: 25px;
     background-color: #628D2A;
+    background-color: transparent;
 }
 
 .img-error{

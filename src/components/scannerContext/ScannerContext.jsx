@@ -13,7 +13,7 @@ export function ScannerContextProvider(props){
 
     //Constante para el caso de que no se encuentre ningun articulo
     const SIN_RESULTADOS = [{
-      articulo: "SIN RESULTADOS",
+      articulo: "Sin Resultados",
       descripcion: "0",
       precio: 0,
       stock: 0,
@@ -65,7 +65,6 @@ export function ScannerContextProvider(props){
     const buscarArticulosPorPrefijo = async (textFilter) => {
       cleanListArticuls() //Limpiamos la busqueda
       setWaitArticulContext(true)
-      console.log(textFilter)
       try{
         const q = query(collection(db, "articulos"), 
         where("articulo", ">=", textFilter.toUpperCase()),
@@ -125,7 +124,8 @@ export function ScannerContextProvider(props){
               loadingUpdate,
               loadingComplete,
               buscarArticulosPorPrefijo,
-              waitArticulContext
+              waitArticulContext,
+              cleanListArticuls
 
             }
         }>

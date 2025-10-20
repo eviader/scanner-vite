@@ -4,8 +4,9 @@ import FilterScanner from '../filterScanner/FilterScanner';
 import CamaraScanner from '../camaraScanner/CamaraScanner';
 import ImgProduct from '../imgProduct/ImgProduct';
 import LoadingPage from '../loadingPage/LoadingPage';
+import imgLacoste from '../../assets/img/lacoste.png';
 import { IconBarcode } from '@tabler/icons-react';
-import { useState, useContext, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 
 function ContainerApp() {
@@ -29,8 +30,11 @@ useEffect(() => {
  {  initPage ? 
     <section className='loading'> <LoadingPage /></section> :
     <main className='main-container'>
+      <div className='backgraunde-lacoste-container'>
+      <img className='backgraunde-lacoste' src={imgLacoste} alt="lacoste" />
+      </div>
       <nav className='container-header'>
-          <FilterScanner handleCam = {handleCam}/>
+          <FilterScanner activeCamByFilter= {handleCam}/>
       </nav> 
       <section className='container-result'>
           <ResultScanner />
