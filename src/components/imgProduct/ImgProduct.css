@@ -23,14 +23,14 @@
     position: relative;
     text-align: center;
     width: 80%;
-    color: #fff;
+    color: #f4f4f4;
     font-weight: 500;
     margin: 0px 10px 0px 10px;
     border-radius: 3px;
     padding: 0;
     bottom: 25px;
-    background-color: #628D2A;
-    background-color: transparent;
+    background-color: #00542c;
+    z-index: 9;
 }
 
 .img-error{

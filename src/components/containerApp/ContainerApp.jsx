@@ -43,7 +43,7 @@ useEffect(() => {
         <ImgProduct />
       </section>
       <section className='container-record'>
-        {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconBarcode  size={40} color='black'/></button>}
+        {initButton ? <CamaraScanner handleCam={handleCam}/> : <button className='activeCam' onClick={() => {handleCam(true)}}><IconBarcode  size={40} color='#00542c'/></button>}
       </section>
     </main> }
 
